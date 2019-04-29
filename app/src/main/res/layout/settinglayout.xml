@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".settinglayout">
+    tools:context=".settinglayout"
+    android:background="?attr/backgroundcolor">
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,20 +15,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="5dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="?attr/textcolor"
-                android:text="Look And Feel"/>
+                android:text="Look and Feel"/>
             <Switch
+                android:id="@+id/myswitch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lightmode"
-                android:textSize="10sp"
-                android:textColor="?attr/textcolor"/>
+                android:text="Light mode"
+                android:textColor="?attr/ButtonTextColor"/>
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
