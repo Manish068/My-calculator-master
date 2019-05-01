@@ -7,9 +7,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,11 +51,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Double temp;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle stoggle;
-
+    SharedPref sharedpref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedpref = new SharedPref(this);
+        if(sharedpref.loadNightModeState()==true) {
+            setTheme(R.style.LightTheme);
+        }
+        else  setTheme(R.style.DarkTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer);
         stoggle=new ActionBarDrawerToggle(MainActivity.this,mDrawerLayout,R.string.open,R.string.close);
@@ -268,6 +277,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(stoggle.onOptionsItemSelected(item)){
@@ -275,6 +286,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     private void calculatorUI(){
         zero0=(Button)findViewById(R.id.num0);
