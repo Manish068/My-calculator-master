@@ -21,7 +21,7 @@
         <item name="backgroundcolor">#fcfcfc</item>
         <item name="ButtonTextColor">#808080</item>
         <item name="cardbackground">#ffffff</item>
-        <item name="buttoncolor">#2196f3</item>
+        <item name="buttoncolor">#ffffff</item>
         <item name="textcolor">#000000</item>
     </style>
 
