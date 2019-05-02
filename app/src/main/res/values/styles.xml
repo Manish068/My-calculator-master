@@ -9,8 +9,10 @@
         <item name="backgroundcolor">#303030</item>
         <item name="cardbackground">#424242</item>
         <item name="ButtonTextColor">#808080</item>
-        <item name="buttoncolor">#111111</item>
-        <item name="textcolor">#ffffff</item>
+        <item name="buttoncolor">#000000</item>
+        <item name="textcolor">#33FFCC</item>
+        <item name="bordercolor">#FFFFFF</item>
+        <item name="edittext">#FFFFFF</item>
     </style>
 
     <style name="LightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -21,8 +23,10 @@
         <item name="backgroundcolor">#fcfcfc</item>
         <item name="ButtonTextColor">#808080</item>
         <item name="cardbackground">#ffffff</item>
-        <item name="buttoncolor">#ffffff</item>
-        <item name="textcolor">#000000</item>
+        <item name="buttoncolor">#2196f3</item>
+        <item name="bordercolor">#000000</item>
+        <item name="textcolor">#FFFFFF</item>
+        <item name="edittext">#000000</item>
     </style>
 
     <style name="DarkTheme.NoAcionBar">
