@@ -42,6 +42,8 @@ public class settinglayout extends AppCompatActivity {
     }
     public void restartApp(){
         Intent i=new Intent(getApplicationContext(),MainActivity.class);
+        Intent s=new Intent(getApplicationContext(),Scientific.class);
+        startActivity(s);
         startActivity(i);
         finish();
     }

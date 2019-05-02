@@ -59,10 +59,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setTheme(R.style.LightTheme);
         }
         else  setTheme(R.style.DarkTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer);
         stoggle=new ActionBarDrawerToggle(MainActivity.this,mDrawerLayout,R.string.open,R.string.close);
         mDrawerLayout.addDrawerListener(stoggle);

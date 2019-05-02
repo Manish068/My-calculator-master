@@ -33,12 +33,17 @@ public class Scientific extends AppCompatActivity implements NavigationView.OnNa
     Button zero0,one1,two2,three3,four4,five5,six6,seven7,eight8,nine9,equal,cosec,cot,sec;
     Button add,minus,division,multiply,del,AC,log,ln,ANS,EXP,dot,openbr,closebr,x2,x3,comma,fact,reci,pie,rad,pow,sqrt;
     Boolean shiftpressed=false;
-    int temp;
-
+    SharedPref sharedpref;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedpref = new SharedPref(this);
+        if(sharedpref.loadNightModeState()==true) {
+            setTheme(R.style.LightTheme);
+        }
+        else  setTheme(R.style.DarkTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scientific);
         mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer);
