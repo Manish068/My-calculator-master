@@ -357,8 +357,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(myintent);
             return false;
         }
-        if (id==R.id.standard) {
-
+        if (id==R.id.Curr) {
+            Intent myintent=new Intent(MainActivity.this,CurrencyConversion.class);
+            startActivity(myintent);
+            return false;
+        }
+        if(id==R.id.standard){
 
         }
         return false;

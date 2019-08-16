@@ -9,10 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/DarkTheme">
-        <activity android:name=".settinglayout"
-            android:label="Settings"></activity>
-        <activity android:name=".Scientific"
-            android:label="Scientific Calculator"></activity>
+        <activity android:name=".CurrencyConversion"></activity>
+        <activity
+            android:name=".settinglayout"
+            android:label="Settings" />
+        <activity
+            android:name=".Scientific"
+            android:label="Scientific Calculator" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

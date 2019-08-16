@@ -13,6 +13,10 @@
         android:title="Scientific Calculator "
         android:icon="@drawable/ic_scientific"/>
 
+    <item android:id="@+id/Curr"
+        android:title="Currency Converter"
+        android:icon="@drawable/ic_exchange"/>
+
     <item android:id="@+id/set"
         android:title="Settings"
         android:icon="@drawable/ic_settings"/>

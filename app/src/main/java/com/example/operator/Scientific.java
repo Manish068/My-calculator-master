@@ -46,6 +46,7 @@ public class Scientific extends AppCompatActivity implements NavigationView.OnNa
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scientific);
+
         mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer);
         stoggle=new ActionBarDrawerToggle(Scientific.this,mDrawerLayout,R.string.open,R.string.close);
         mDrawerLayout.addDrawerListener(stoggle);
@@ -618,12 +619,19 @@ public class Scientific extends AppCompatActivity implements NavigationView.OnNa
         if(id==R.id.set){
             Intent myintent=new Intent(Scientific.this,settinglayout.class);
             startActivity(myintent);
+            return false;
 
         }
         if (id==R.id.standard)
         {
             Intent myintent=new Intent(Scientific.this,MainActivity.class);
             startActivity(myintent);
+            return false;
+        }
+        if (id==R.id.Curr){
+            Intent myintent=new Intent(Scientific.this,CurrencyConversion.class);
+            startActivity(myintent);
+            return false;
         }
         return false;
     }
