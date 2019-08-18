@@ -46,7 +46,6 @@ public class Scientific extends AppCompatActivity implements NavigationView.OnNa
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scientific);
-
         mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer);
         stoggle=new ActionBarDrawerToggle(Scientific.this,mDrawerLayout,R.string.open,R.string.close);
         mDrawerLayout.addDrawerListener(stoggle);
