@@ -2,6 +2,7 @@ package com.example.operator;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -49,7 +50,7 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
     private ActionBarDrawerToggle stoggle;
     SharedPref sharedpref;
     private Spinner spin1,spin2;
-    String curfrom,curto;
+    private String curfrom,curto;
     Double number;
     JsonPlaceHolderApi jsonPlaceHolderApi;
 
@@ -104,6 +105,8 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
 
+
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.Curren, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spin1.setAdapter(adapter);
@@ -112,7 +115,7 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
         spin1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                curfrom= parent.getSelectedItem().toString();
+
             }
 
             @Override
@@ -120,11 +123,9 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
 
             }
         });
-
         spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                curto=parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -140,8 +141,11 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
                 et1.setText("");
                 et1.setText(et1.getText().toString()+"0.0");
                 number=Double.parseDouble(et1.getText().toString());
-                Toast.makeText(getApplicationContext(),curfrom,Toast.LENGTH_SHORT).show();
-                Call<Curr> call = jsonPlaceHolderApi.getCurrency(curfrom,"INR",number);
+                curfrom=spin1.getSelectedItem().toString();
+                curto=spin2.getSelectedItem().toString();
+                Toast.makeText(getApplicationContext(),curfrom,Toast.LENGTH_LONG).show();
+
+                Call<Curr> call = jsonPlaceHolderApi.getCurrency(curfrom,curto,number);
 
                 call.enqueue(new Callback<Curr>() {
                     @Override
@@ -169,8 +173,11 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
         one1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                et1.setText(et1.getText().toString()+"1");
+                et1.setText("");
+                et1.setText(et1.getText().toString()+"1.0");
                 number=Double.parseDouble(et1.getText().toString());
+                curfrom=spin1.getSelectedItem().toString();
+                curto=spin2.getSelectedItem().toString();
                 getCurrency(curfrom,curto,number);
             }
         });

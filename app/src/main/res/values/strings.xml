@@ -55,10 +55,9 @@
     <string name="eq">=</string>
 
     <string-array name="Curren">
-        <item
-            >USD</item>
-        <item >EUR</item>
-        <item >INR</item>
+        <item>USD</item>
+        <item>EUR</item>
+        <item>INR</item>
     </string-array>
 
 
