@@ -16,7 +16,6 @@
             android:id="@+id/et1"
             android:layout_width="131dp"
             android:layout_height="55dp"
-            android:editable="false"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="40dp"
@@ -27,7 +26,7 @@
             android:id="@+id/Rate"
             android:layout_width="131dp"
             android:layout_height="55dp"
-            android:editable="false"
+
             android:layout_below="@+id/et1"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="2dp"

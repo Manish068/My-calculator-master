@@ -126,6 +126,7 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
         spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
             }
 
             @Override
@@ -140,32 +141,12 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
             public void onClick(View view) {
                 et1.setText("");
                 et1.setText(et1.getText().toString()+"0.0");
+                et1.setSelection(et1.getText().length());
                 number=Double.parseDouble(et1.getText().toString());
                 curfrom=spin1.getSelectedItem().toString();
                 curto=spin2.getSelectedItem().toString();
-                Toast.makeText(getApplicationContext(),curfrom,Toast.LENGTH_LONG).show();
+                getCurrency(curfrom,curto,number);
 
-                Call<Curr> call = jsonPlaceHolderApi.getCurrency(curfrom,curto,number);
-
-                call.enqueue(new Callback<Curr>() {
-                    @Override
-                    public void onResponse(Call<Curr> call, Response<Curr> response) {
-                        if (!response.isSuccessful()) {
-                            value.setText("code:" + response.code());
-                            return;
-                        }
-
-                        rate.setText(response.body().getRate() + "");
-                        value.setText(response.body().getV()+"");
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<Curr> call, Throwable t) {
-                        value.setText(t.getMessage());
-
-                    }
-                });
 
             }
         });
@@ -175,6 +156,7 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
             public void onClick(View view) {
                 et1.setText("");
                 et1.setText(et1.getText().toString()+"1.0");
+                et1.setSelection(et1.getText().length());
                 number=Double.parseDouble(et1.getText().toString());
                 curfrom=spin1.getSelectedItem().toString();
                 curto=spin2.getSelectedItem().toString();
@@ -185,7 +167,12 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
         two2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                et1.setText(et1.getText().toString()+"2");
+                et1.setText(et1.getText().toString()+"2.0");
+                et1.setSelection(et1.getText().length());
+                number=Double.parseDouble(et1.getText().toString());
+                curfrom=spin1.getSelectedItem().toString();
+                curto=spin2.getSelectedItem().toString();
+                getCurrency(curfrom,curto,number);
             }
         });
 
@@ -193,6 +180,10 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
             @Override
             public void onClick(View view) {
                 et1.setText(et1.getText().toString()+"3");
+                number=Double.parseDouble(et1.getText().toString());
+                curfrom=spin1.getSelectedItem().toString();
+                curto=spin2.getSelectedItem().toString();
+                getCurrency(curfrom,curto,number);
             }
         });
 
