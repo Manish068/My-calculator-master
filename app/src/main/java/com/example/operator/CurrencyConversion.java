@@ -43,6 +43,7 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
     private Button eight8;
     private Button nine9;
     private Button AC;
+    private Button dot;
     private ImageButton Backspace;
     private EditText et1;
     private TextView value, rate;
@@ -84,6 +85,7 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
         value = (TextView) findViewById(R.id.value);
         spin1 = (Spinner) findViewById(R.id.spinfrom);
         spin2 = (Spinner) findViewById(R.id.spinto);
+        dot= (Button) findViewById(R.id.cdot);
 
         rate.setText("0");
         et1.setText("0");
@@ -363,6 +365,28 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
                     curto = spin2.getSelectedItem().toString();
                     getCurrency(curfrom, curto, number);
                 }
+            }
+        });
+
+        dot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (et1.getText().toString().equals("0")) {
+                    et1.setText("0.");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    //curfrom = spin1.getSelectedItem().toString();
+                    //curto = spin2.getSelectedItem().toString();
+                    //getCurrency(curfrom, curto, number);
+                } else {
+                    et1.setText(et1.getText() + ".");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                }
+
             }
         });
     }
