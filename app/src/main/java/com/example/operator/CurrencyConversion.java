@@ -45,56 +45,55 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
     private Button AC;
     private ImageButton Backspace;
     private EditText et1;
-    private TextView value,rate;
+    private TextView value, rate;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle stoggle;
     SharedPref sharedpref;
-    private Spinner spin1,spin2;
-    private String curfrom,curto;
+    private Spinner spin1, spin2;
+    private String curfrom, curto;
     Double number;
     JsonPlaceHolderApi jsonPlaceHolderApi;
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedpref = new SharedPref(this);
-        if(sharedpref.loadNightModeState()==true) {
+        if (sharedpref.loadNightModeState() == true) {
             setTheme(R.style.LightTheme);
-        }
-        else  setTheme(R.style.DarkTheme);
+        } else setTheme(R.style.DarkTheme);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_currency_conversion);
 
 
-        mDrawerLayout=(DrawerLayout)findViewById(R.id.drawercur);
-        zero0=(Button)findViewById(R.id.c0);
-        one1=(Button)findViewById(R.id.c1);
-        two2=(Button)findViewById(R.id.c2);
-        three3=(Button)findViewById(R.id.c3);
-        four4=(Button)findViewById(R.id.c4);
-        five5=(Button)findViewById(R.id.c5);
-        six6=(Button)findViewById(R.id.c6);
-        seven7=(Button)findViewById(R.id.c7);
-        eight8=(Button)findViewById(R.id.c8);
-        nine9=(Button)findViewById(R.id.c9);
-        AC=(Button)findViewById(R.id.cAC);
-        Backspace=(ImageButton)findViewById(R.id.cimgbtn);
-        et1=(EditText)findViewById(R.id.et1);
-        rate=(TextView) findViewById(R.id.Rate);
-        value=(TextView)findViewById(R.id.value);
-        spin1=(Spinner)findViewById(R.id.spinfrom);
-        spin2=(Spinner)findViewById(R.id.spinto);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawercur);
+        zero0 = (Button) findViewById(R.id.c0);
+        one1 = (Button) findViewById(R.id.c1);
+        two2 = (Button) findViewById(R.id.c2);
+        three3 = (Button) findViewById(R.id.c3);
+        four4 = (Button) findViewById(R.id.c4);
+        five5 = (Button) findViewById(R.id.c5);
+        six6 = (Button) findViewById(R.id.c6);
+        seven7 = (Button) findViewById(R.id.c7);
+        eight8 = (Button) findViewById(R.id.c8);
+        nine9 = (Button) findViewById(R.id.c9);
+        AC = (Button) findViewById(R.id.cAC);
+        Backspace = (ImageButton) findViewById(R.id.cimgbtn);
+        et1 = (EditText) findViewById(R.id.et1);
+        rate = (TextView) findViewById(R.id.Rate);
+        value = (TextView) findViewById(R.id.value);
+        spin1 = (Spinner) findViewById(R.id.spinfrom);
+        spin2 = (Spinner) findViewById(R.id.spinto);
 
         rate.setText("0");
+        et1.setText("0");
         value.setText("0");
 
-        stoggle=new ActionBarDrawerToggle(CurrencyConversion.this,mDrawerLayout,R.string.open,R.string.close);
+        stoggle = new ActionBarDrawerToggle(CurrencyConversion.this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(stoggle);
         stoggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        NavigationView navigationView=(NavigationView)findViewById(R.id.navigation_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -103,8 +102,6 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
                 .build();
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-
-
 
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.Curren, android.R.layout.simple_spinner_item);
@@ -139,130 +136,240 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
         zero0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                et1.setText("");
-                et1.setText(et1.getText().toString()+"0.0");
-                et1.setSelection(et1.getText().length());
-                number=Double.parseDouble(et1.getText().toString());
-                curfrom=spin1.getSelectedItem().toString();
-                curto=spin2.getSelectedItem().toString();
-                getCurrency(curfrom,curto,number);
-
-
+                if (et1.getText().toString().equals("0")) {
+                    et1.setText("0");
+                    rate.setText("0");
+                } else {
+                    et1.setText(et1.getText() + "0");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                }
             }
         });
 
         one1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                et1.setText("");
-                et1.setText(et1.getText().toString()+"1.0");
-                et1.setSelection(et1.getText().length());
-                number=Double.parseDouble(et1.getText().toString());
-                curfrom=spin1.getSelectedItem().toString();
-                curto=spin2.getSelectedItem().toString();
-                getCurrency(curfrom,curto,number);
+                if (et1.getText().toString().equals("0")) {
+                    et1.setText("1");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                } else {
+                    et1.setText(et1.getText() + "1");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                }
+
             }
         });
 
         two2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                et1.setText(et1.getText().toString()+"2.0");
-                et1.setSelection(et1.getText().length());
-                number=Double.parseDouble(et1.getText().toString());
-                curfrom=spin1.getSelectedItem().toString();
-                curto=spin2.getSelectedItem().toString();
-                getCurrency(curfrom,curto,number);
+                if (et1.getText().toString().equals("0")) {
+                    et1.setText("2");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                } else {
+                    et1.setText(et1.getText() + "2");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                }
             }
         });
 
         three3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                et1.setText(et1.getText().toString()+"3");
-                number=Double.parseDouble(et1.getText().toString());
-                curfrom=spin1.getSelectedItem().toString();
-                curto=spin2.getSelectedItem().toString();
-                getCurrency(curfrom,curto,number);
+                if (et1.getText().toString().equals("0")) {
+                    et1.setText("3");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                } else {
+                    et1.setText(et1.getText() + "3");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                }
             }
         });
 
         four4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                et1.setText(et1.getText().toString()+"4");
+                if (et1.getText().toString().equals("0")) {
+                    et1.setText("4");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                } else {
+                    et1.setText(et1.getText() + "4");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                }
             }
         });
 
         five5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                et1.setText(et1.getText().toString()+"5");
+                if (et1.getText().toString().equals("0")) {
+                    et1.setText("5");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                } else {
+                    et1.setText(et1.getText() + "5");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                }
             }
         });
 
         six6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                et1.setText(et1.getText().toString()+"6");
+                if (et1.getText().toString().equals("0")) {
+                    et1.setText("6");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                } else {
+                    et1.setText(et1.getText() + "6");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                }
             }
         });
 
         seven7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                et1.setText(et1.getText().toString()+"7");
+                if (et1.getText().toString().equals("0")) {
+                    et1.setText("7");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                } else {
+                    et1.setText(et1.getText() + "7");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                }
             }
         });
         eight8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                et1.setText(et1.getText().toString()+"8");
+                if (et1.getText().toString().equals("0")) {
+                    et1.setText("8");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                } else {
+                    et1.setText(et1.getText() + "8");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                }
             }
         });
 
         nine9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                et1.setText(et1.getText().toString()+"9");
+                if (et1.getText().toString().equals("0")) {
+                    et1.setText("9");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                } else {
+                    et1.setText(et1.getText() + "9");
+                    et1.setSelection(et1.getText().length());
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
+                }
             }
         });
 
         AC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                et1.setText("");
+                et1.setText("0");
+                rate.setText("0");
+                value.setText("0");
             }
         });
 
         Backspace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text=et1.getText().toString();
-                if (et1.length()==1){
-                    et1.setText("");
-                }else{
-                    et1.setText(text.substring(0,text.length()-1));
+                String text = et1.getText().toString();
+                if (et1.length() == 1) {
+                    et1.setText("0");
+                    rate.setText("0");
+                    value.setText("0");
+                } else {
+                    et1.setText(text.substring(0, text.length() - 1));
+                    number = Double.parseDouble(et1.getText().toString());
+                    curfrom = spin1.getSelectedItem().toString();
+                    curto = spin2.getSelectedItem().toString();
+                    getCurrency(curfrom, curto, number);
                 }
             }
         });
-
-
-        spin1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(stoggle.onOptionsItemSelected(item)){
+        if (stoggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -270,34 +377,33 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        int id= menuItem.getItemId();
+        int id = menuItem.getItemId();
 
-        if(id==R.id.home)
-        {
-            Intent myintent=new Intent(CurrencyConversion.this,Scientific.class);
+        if (id == R.id.home) {
+            Intent myintent = new Intent(CurrencyConversion.this, Scientific.class);
             startActivity(myintent);
             return false;
 
         }
-        if(id==R.id.set){
-            Intent myintent=new Intent(CurrencyConversion.this,settinglayout.class);
+        if (id == R.id.set) {
+            Intent myintent = new Intent(CurrencyConversion.this, settinglayout.class);
             startActivity(myintent);
             return false;
 
         }
-        if (id==R.id.standard)
-        {
-            Intent myintent=new Intent(CurrencyConversion.this,MainActivity.class);
+        if (id == R.id.standard) {
+            Intent myintent = new Intent(CurrencyConversion.this, MainActivity.class);
             startActivity(myintent);
             return false;
         }
-        if (id==R.id.Curr){
+        if (id == R.id.Curr) {
             return false;
         }
         return false;
     }
-    private void getCurrency(String curfrom,String curto,Double number) {
-        Call<Curr> call = jsonPlaceHolderApi.getCurrency(curfrom,curto,number);
+
+    private void getCurrency(String curfrom, String curto, Double number) {
+        Call<Curr> call = jsonPlaceHolderApi.getCurrency(curfrom, curto, number);
 
         call.enqueue(new Callback<Curr>() {
             @Override
@@ -308,7 +414,7 @@ public class CurrencyConversion extends AppCompatActivity implements NavigationV
                 }
 
                 rate.setText(response.body().getRate() + "");
-                value.setText(response.body().getV()+"");
+                value.setText(response.body().getV() + "");
 
             }
 
